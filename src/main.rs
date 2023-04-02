@@ -25,31 +25,42 @@ fn select_temperature() {
         let user_choice: String = user_input().trim().to_lowercase();
 
         if user_choice == "f" {
-            println!("Input the Fahrenheit value: ");
+            loop {
+                println!("Input the Fahrenheit value: ");
 
-            let fahrenheit: f64 = user_input()
-                .trim()
-                .parse()
-                .expect("Must to input a number: found _string_ or _None_");
+                let fahrenheit: f64 = match user_input().trim().parse() {
+                    Ok(f64) => f64,
+                    Err(parse_float_error) => {
+                        println!("Please input a valid value. _{}_", parse_float_error);
+                        continue;
+                    }
+                };
+                println!(
+                    "The equivalent of {fahrenheit} fahrenheit to celsius is: {}",
+                    fahrenheit_to_celsius(fahrenheit)
+                );
 
-            println!(
-                "The equivalent of {fahrenheit} fahrenheit to celsius is: {}",
-                fahrenheit_to_celsius(fahrenheit)
-            );
-            break 'chose;
+                break 'chose;
+            }
         } else if user_choice == "c" {
-            println!("Input the Celsius value: ");
+            loop {
+                println!("Input the Celsius value: ");
 
-            let celsius: f64 = user_input()
-                .trim()
-                .parse()
-                .expect("Must to input a number: found _string_ or _None_");
+                let celsius: f64 = match user_input().trim().parse() {
+                    Ok(f64) => f64,
+                    Err(parse_float_error) => {
+                        println!("Please input a valid value. _{}_", parse_float_error);
+                        continue;
+                    }
+                };
 
-            println!(
-                "The equivalent of {celsius} celsius to fahrenheit is: {}",
-                celsius_to_fahrenheit(celsius)
-            );
-            break 'chose;
+                println!(
+                    "The equivalent of {celsius} celsius to fahrenheit is: {}",
+                    celsius_to_fahrenheit(celsius)
+                );
+
+                break 'chose;
+            }
         } else {
             println!("Input a valid option");
             continue;
