@@ -10,6 +10,6 @@
 - [x] Beggin in a main loop
 - [x] Present the options
 - [x] When the user choose an option we need to validate if is a temperature available option 
-- [] Ask to the user to input a temperature value and validate the value
+- [ ] Ask to the user to input a temperature value and validate the value
 - [x] At the end of the conversion, consult the user if would like to do another conversion
 - [x] If the answer is affirmative, present the options again.
