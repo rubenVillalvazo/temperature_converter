@@ -29,9 +29,9 @@ fn select_temperature() {
                 println!("Input the Fahrenheit value: ");
 
                 let fahrenheit: f64 = match user_input().trim().parse() {
-                    Ok(f64) => f64,
+                    Ok(value) => value,
                     Err(parse_float_error) => {
-                        println!("Please input a valid value. _{}_", parse_float_error);
+                        println!("Please input a valid value: {}", parse_float_error);
                         continue;
                     }
                 };
@@ -47,9 +47,9 @@ fn select_temperature() {
                 println!("Input the Celsius value: ");
 
                 let celsius: f64 = match user_input().trim().parse() {
-                    Ok(f64) => f64,
+                    Ok(value) => value,
                     Err(parse_float_error) => {
-                        println!("Please input a valid value. _{}_", parse_float_error);
+                        println!("Please input a valid value: {}", parse_float_error);
                         continue;
                     }
                 };
