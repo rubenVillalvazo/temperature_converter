@@ -38,7 +38,8 @@ fn select_temperature() {
                         }
                     };
                 println!(
-                    "The equivalent of {fahrenheit} fahrenheit to celsius is: {}",
+                    "The equivalent of {} fahrenheit to celsius is: {}",
+                    fahrenheit,
                     fahrenheit_to_celsius(fahrenheit)
                 );
 
@@ -58,7 +59,8 @@ fn select_temperature() {
                 };
 
                 println!(
-                    "The equivalent of {celsius} celsius to fahrenheit is: {}",
+                    "The equivalent of {} celsius to fahrenheit is: {}",
+                    celsius,
                     celsius_to_fahrenheit(celsius)
                 );
 
@@ -74,7 +76,7 @@ fn select_temperature() {
 fn converter() {
     select_temperature();
     'converter: loop {
-        println!("Would you like to do another convertion? (Y/N)");
+        println!("Would you like to do another conversion? (Y/N)");
         let user_answer: String = user_input()
             .expect("Failed to read input")
             .trim()
