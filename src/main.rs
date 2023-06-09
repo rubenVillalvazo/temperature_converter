@@ -10,31 +10,33 @@ fn celsius_to_fahrenheit(value: f64) -> f64 {
     return fahrenheit;
 }
 
-fn user_input() -> String {
+fn user_input() -> io::Result<String> {
     let mut user_input: String = String::new();
-    io::stdin()
-        .read_line(&mut user_input)
-        .expect("Failed to read line");
-    return user_input;
+    io::stdin().read_line(&mut user_input)?;
+    return Ok(user_input);
 }
 
 fn select_temperature() {
     'chose: loop {
         println!("Chose (F) for fahrenheit to celsius or (C) for celsius to fahrenheit: ");
 
-        let user_choice: String = user_input().trim().to_lowercase();
+        let user_choice: String = user_input()
+            .expect("Failed to read input")
+            .trim()
+            .to_lowercase();
 
         if user_choice == "f" {
             loop {
                 println!("Input the Fahrenheit value: ");
 
-                let fahrenheit: f64 = match user_input().trim().parse() {
-                    Ok(value) => value,
-                    Err(parse_float_error) => {
-                        println!("Please input a valid value: {}", parse_float_error);
-                        continue;
-                    }
-                };
+                let fahrenheit: f64 =
+                    match user_input().expect("Failed to read input").trim().parse() {
+                        Ok(value) => value,
+                        Err(parse_float_error) => {
+                            println!("Please input a valid value: {}", parse_float_error);
+                            continue;
+                        }
+                    };
                 println!(
                     "The equivalent of {fahrenheit} fahrenheit to celsius is: {}",
                     fahrenheit_to_celsius(fahrenheit)
@@ -46,7 +48,8 @@ fn select_temperature() {
             loop {
                 println!("Input the Celsius value: ");
 
-                let celsius: f64 = match user_input().trim().parse() {
+                let celsius: f64 = match user_input().expect("Failed to read input").trim().parse()
+                {
                     Ok(value) => value,
                     Err(parse_float_error) => {
                         println!("Please input a valid value: {}", parse_float_error);
@@ -72,7 +75,10 @@ fn converter() {
     select_temperature();
     'converter: loop {
         println!("Would you like to do another convertion? (Y/N)");
-        let user_answer: String = user_input().trim().to_lowercase();
+        let user_answer: String = user_input()
+            .expect("Failed to read input")
+            .trim()
+            .to_lowercase();
         if user_answer == "y" || user_answer == "yes" {
             converter();
             break 'converter;
